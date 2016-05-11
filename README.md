@@ -7,13 +7,13 @@ Players then place the node where they want to offer their items for rent.
 
 Right clicking the rental node:
 
- if the owner: allows the owner to add and remove items for rent, similar to chests.
+- if the owner: allows the owner to add and remove items for rent, similar to chests.
 
- if another player: allows to browse items for rent. 
+- if another player: allows to browse items for rent. 
 
-    Moving an item from the for rent area to the player's inventory updates the total daily rent amount.
+Moving an item from the for rent area to the player's inventory updates the total daily rent amount.
 
-    Moving an item from the players invnetory to the rental office inventory cancels the player's rent for that item
+Moving an item from the players inventory to the rental office inventory cancels the player's rent for that item
 
 Rent is applied daily at Minetest time 00:00. Money is moved from the renter's account to the rental office owner's account.
 
@@ -23,6 +23,6 @@ Any items held in the rented item will be lost.
 
 Chat commands
 
-/rent <<empty>> | <<player>> - shows the list of items currently being rented by the player and their daily rent amount.
-If <<player>> is supplied and the player has the rent privilege, that player's items and rent amounts are displayed (administrative).
+/rent \<empty\> | \<player\> - shows the list of items currently being rented by the player and their daily rent amount.
+If \<player\> is supplied and the player has the rent privilege, that player's items and rent amounts are displayed (administrative).
 
