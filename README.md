@@ -1,5 +1,5 @@
 # node_rental
-Minetest mod that allows a player to rent out any node they have. Requires money mod.
+Minetest mod that allows a player to rent out any node they have. Requires <A href=https://github.com/ChaosWormz/minetest-money>money</A> mod .
 
 Players craft the rental office node from materials.
 
@@ -11,15 +11,13 @@ Right clicking the rental node:
 
 - if another player: allows to browse items for rent. 
 
-Moving an item from the for rent area to the player's inventory updates the total daily rent amount.
+Moving an item from the for rent area to the player's inventory and creates a rental record for the amount offered by the owner.
 
-Moving an item from the players inventory to the rental office inventory cancels the player's rent for that item
+Moving an item from the players inventory to the rental office inventory cancels the player's rent for that item.
 
-Rent is applied daily at Minetest time 00:00. Money is moved from the renter's account to the rental office owner's account.
+Rent is applied daily near Minetest time 00:00. Money is moved from the renter's account to the rental office owner's account.
 
-If an account goes negative, the item is repossesed (Repo!) and placed into the repo inventory. These items can be viewed by the owner at any of their rental offices and moved back to availble to rent, or into their own inventory. 
-
-Any items held in the rented item will be lost.
+Renter's accounts can go negative. The desired behaviour here would be to cause a repossession, but it is difficult to find the item in the world, so rent will continue to ba assessed until the item is returned. The penalty for the renter is that they must make more money before buying other things.
 
 Chat commands
 
