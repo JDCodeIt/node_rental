@@ -208,6 +208,12 @@ minetest.register_node("node_rental:rental_office", {
 		return drops
 	end,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if not is_rental_office_owner(pos, player) then
+			if money.get_money(player:get_player_name()) < 5000 then
+				minetest.chat_send_player(player:get_player_name(), "You must have at least 5000 money before renting anything.")
+				return
+			end
+		end
 		minetest.show_formspec(
 			player:get_player_name(),
 			"node_rental:rental",
