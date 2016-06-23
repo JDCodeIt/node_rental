@@ -156,12 +156,12 @@ minetest.register_node("node_rental:rental_office", {
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		if not is_rental_office_owner(pos, player) then
 			local player_name = player:get_player_name()
+			local meta = minetest.get_meta(pos);
 			-- no more renting with nevative account balance
-			if money.get_money(player_name) < 0 then
-				minetest.chat_send_player(player:get_player_name(), "You have no money. Earn some more before renting anything.")
+			if money.get_money(player_name) < (5 * stack:get_count() * tonumber(meta:get_int("rent" .. tostring(index)))) then
+				minetest.chat_send_player(player:get_player_name(), "You don't have enough money to rent that. Earn some more before renting.")
 				return 0
 			else
-				local meta = minetest.get_meta(pos);
 				return node_rental_rent_item(player, pos, stack, tonumber(meta:get_int("rent" .. tostring(index))))
 			end
 		end
@@ -208,12 +208,6 @@ minetest.register_node("node_rental:rental_office", {
 		return drops
 	end,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		if not is_rental_office_owner(pos, player) then
-			if money.get_money(player:get_player_name()) < 5000 then
-				minetest.chat_send_player(player:get_player_name(), "You must have at least 5000 money before renting anything.")
-				return
-			end
-		end
 		minetest.show_formspec(
 			player:get_player_name(),
 			"node_rental:rental",

@@ -126,8 +126,15 @@ function bill_renters()
 	for i, rental in ipairs(node_rental.node_rental) do
 		if rental then
 			local payment = rental.quantity * rental.rental_unit_price
-			money.set_money(rental.owner, money.get_money(rental.owner) + payment)
-			money.set_money(rental.renter, money.get_money(rental.renter) - payment)
+			if money.get_money(rental.renter) < payment then
+				money.set_money(rental.owner, money.get_money(rental.owner) + money.get_money(rental.renter))
+				money.set_money(rental.renter, 0)
+				minetest.chat_send_player(rental.owner, "Renter " .. rental.renter .. " stopped paying rent!")
+				minetest.chat_send_player(rental.renter, "You ran out of money! Pay " .. rental.owner .. " or they will REPO your stuff!")
+			else
+				money.set_money(rental.owner, money.get_money(rental.owner) + payment)
+				money.set_money(rental.renter, money.get_money(rental.renter) - payment)
+			end
 		end
 	end
 end

@@ -23,7 +23,7 @@ minetest.register_chatcommand("rented", {
 		local admin = minetest.check_player_privs(name, node_rental.adminPrivs)
 		local rentalStrings = {}
 		for id, rental in pairs(node_rental.node_rental) do
-			if admin and rental and param == rental.owner then
+			if admin and rental and (param == rental.owner or #param == 0) then 
 				table.insert(rentalStrings, node_rental:toString(id))
 			elseif rental and rental.owner == name then
 				table.insert(rentalStrings, node_rental:toString(id))
@@ -35,3 +35,17 @@ minetest.register_chatcommand("rented", {
 		return true, table.concat(rentalStrings, "\n")
 	end
 })
+
+minetest.register_chatcommand("rent_delete", {
+        description = "/rent_delete <ID> Administrative delete of remtal ID - usually after reposession.",
+        func = function(name, param)
+                local admin = minetest.check_player_privs(name, node_rental.adminPrivs)
+		if admin then
+			node_rental.save()
+			node_rental:remove(tonumber(param))
+		else
+			return true, "You do not have the privilege to delete rentals."
+		end
+	end
+})
+
