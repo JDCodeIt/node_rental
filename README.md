@@ -17,7 +17,9 @@ Moving an item from the players inventory to the rental office inventory cancels
 
 Rent is applied daily near Minetest time 00:00. Money is moved from the renter's account to the rental office owner's account.
 
-Renter's accounts can go negative. The desired behaviour here would be to cause a repossession, but it is difficult to find the item in the world, so rent will continue to ba assessed until the item is returned. The penalty for the renter is that they must make more money before buying other things.
+Renter's accounts cannot go negative. The desired behaviour here would be to cause a repossession, but it is difficult to find the item in the world, so rent will continue to ba assessed until the item is returned. The penalty for the renter is that they must make more money before buying other things.
+
+A message will appear on the owner's chat and renter's chat if rent is not being paid.
 
 Chat commands
 
